@@ -11,68 +11,35 @@ const ImageSlider = () => {
   const slideRefs = useRef([]);
   const indicatorRefs = useRef([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
   
   // Replace these with your actual image paths
   const slides = [
-    {
-      id: 1,
-      image: "/1.jpg",
-      title: "Celebrity Events",
-      description: "Exclusive celebrity appearances and meet & greets"
-    },
-    {
-      id: 2,
-      image: "/2.jpg", 
-      title: "Wedding Functions",
-      description: "Making your special day unforgettable"
-    },
-    {
-      id: 3,
-      image: "/3.jpg",
-      title: "Corporate Events", 
-      description: "Professional entertainment solutions"
-    },
-    {
-      id: 4,
-      image: "/4.jpg",
-      title: "Shop Openings",
-      description: "Grand opening celebrations with style"
-    },
-    {
-      id: 5,
-      image: "/5.jpg",
-      title: "Promotions",
-      description: "Creative promotional campaigns"
-    },
-    {
-        id: 6,
-        image: "/6.jpg",
-        title: "Behind the Scenes",
-        description: "Exclusive behind-the-scenes content"
-        },
-        {
-        id: 7,
-        image: "/7.jpg",
-        title: "Instagram Promotions",
-        description: "Boost your brand with social media promotions"
-        },
-        {
-        id: 8,
-        image: "/8.jpg",
-        title: "Event Highlights",
-        description: "Capturing the best moments from our events"
-    }
+    { id: 1, image: "/1.jpg" },
+    { id: 2, image: "/2.jpg" },
+    { id: 3, image: "/3.jpg" },
+    { id: 4, image: "/4.jpg" },
+    { id: 5, image: "/5.jpg" },
+    { id: 6, image: "/6.jpg" },
+    { id: 7, image: "/7.jpg" },
+    { id: 8, image: "/8.jpg" },
+    { id: 9, image: "/9.jpg" },
+    { id: 10, image: "/10.jpg" }
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial reveal animation
+      // Initial reveal animation - FIXED: Removed reverse behavior
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: slideshowRef.current,
           start: "top 80%",
           end: "bottom 20%",
-          toggleActions: "play none reverse none",
+          // FIXED: Changed to prevent hiding on scroll up
+          toggleActions: "play none none none",
+          onStart: () => setHasAnimated(true),
+          // Optional: Add this for debugging
+          // markers: true,
         }
       });
 
@@ -101,6 +68,12 @@ const ImageSlider = () => {
           });
         }
       });
+
+      // ADDED: Ensure elements stay visible after animation
+      tl.set([titleRef.current, containerRef.current], {
+        opacity: 1,
+        clearProps: "transform"
+      });
     });
 
     return () => ctx.revert();
@@ -110,7 +83,7 @@ const ImageSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 4000); // Change slide every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -175,15 +148,9 @@ const ImageSlider = () => {
             >
               <img 
                 src={slide.image} 
-                alt={slide.title}
+                alt={`Gallery image ${slide.id}`}
                 style={styles.slideImage}
               />
-              <div style={styles.slideOverlay}>
-                <div style={styles.slideContent}>
-                  <h3 style={styles.slideTitle}>{slide.title}</h3>
-                  <p style={styles.slideDescription}>{slide.description}</p>
-                </div>
-              </div>
             </div>
           ))}
         </div>
@@ -222,7 +189,7 @@ const ImageSlider = () => {
 
 export default ImageSlider;
 
-// Styles
+// Updated Styles - Same as before
 const styles = {
   slideshow: {
     position: 'relative',
@@ -264,6 +231,7 @@ const styles = {
     borderRadius: '20px',
     overflow: 'hidden',
     boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+    border: '2px solid rgba(255, 215, 0, 0.1)',
   },
   slidesWrapper: {
     position: 'relative',
@@ -283,34 +251,7 @@ const styles = {
     height: '100%',
     objectFit: 'cover',
     willChange: 'transform',
-  },
-  slideOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    background: 'linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)',
-    display: 'flex',
-    alignItems: 'flex-end',
-    padding: '40px',
-  },
-  slideContent: {
-    color: '#ffffff',
-  },
-  slideTitle: {
-    fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-    fontWeight: 700,
-    margin: '0 0 10px 0',
-    textShadow: '0px 2px 8px rgba(0,0,0,0.8)',
-    color: '#FFD700',
-  },
-  slideDescription: {
-    fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-    fontWeight: 300,
-    margin: 0,
-    textShadow: '0px 1px 4px rgba(0,0,0,0.8)',
-    opacity: 0.9,
+    filter: 'brightness(1.1) contrast(1.05)',
   },
   indicators: {
     position: 'absolute',
@@ -320,12 +261,16 @@ const styles = {
     display: 'flex',
     gap: '12px',
     zIndex: 10,
+    background: 'rgba(0, 0, 0, 0.3)',
+    padding: '10px 15px',
+    borderRadius: '25px',
+    backdropFilter: 'blur(10px)',
   },
   indicator: {
     width: '12px',
     height: '12px',
     borderRadius: '50%',
-    border: 'none',
+    border: '1px solid rgba(255, 215, 0, 0.3)',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -336,7 +281,7 @@ const styles = {
     bottom: 0,
     left: 0,
     width: '100%',
-    height: '3px',
+    height: '4px',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     overflow: 'hidden',
   },
@@ -382,7 +327,7 @@ const styles = {
   },
 };
 
-// Add CSS animations (add this to your global CSS file)
+// CSS Animations remain the same
 const cssAnimations = `
 @keyframes progress {
   0% { transform: scaleX(0); }
