@@ -12,7 +12,7 @@ const ImageSlider1 = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   
   const slides = [
-    { id: 1, image: "/src/assets/1.jpg" },
+    { id: 1, image: "../src/assets/1.jpg" },
     { id: 2, image: "/src/assets/2.jpg" },
     { id: 3, image: "/src/assets/3.jpg" },
     { id: 4, image: "/src/assets/4.jpg" },
