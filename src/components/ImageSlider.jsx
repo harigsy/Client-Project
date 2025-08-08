@@ -16,49 +16,49 @@ const ImageSlider = () => {
   const slides = [
     {
       id: 1,
-      image: "./public/1.jpg",
+      image: "/1.jpg",
       title: "Celebrity Events",
       description: "Exclusive celebrity appearances and meet & greets"
     },
     {
       id: 2,
-      image: "./public/2.jpg", 
+      image: "/2.jpg", 
       title: "Wedding Functions",
       description: "Making your special day unforgettable"
     },
     {
       id: 3,
-      image: "./public/3.jpg",
+      image: "/3.jpg",
       title: "Corporate Events", 
       description: "Professional entertainment solutions"
     },
     {
       id: 4,
-      image: "./public/4.jpg",
+      image: "/4.jpg",
       title: "Shop Openings",
       description: "Grand opening celebrations with style"
     },
     {
       id: 5,
-      image: "./public/5.jpg",
+      image: "/5.jpg",
       title: "Promotions",
       description: "Creative promotional campaigns"
     },
     {
         id: 6,
-        image: "./public/6.jpg",
+        image: "/6.jpg",
         title: "Behind the Scenes",
         description: "Exclusive behind-the-scenes content"
         },
         {
         id: 7,
-        image: "./public/7.jpg",
+        image: "/7.jpg",
         title: "Instagram Promotions",
         description: "Boost your brand with social media promotions"
         },
         {
         id: 8,
-        image: "./public/8.jpg",
+        image: "/8.jpg",
         title: "Event Highlights",
         description: "Capturing the best moments from our events"
     }
