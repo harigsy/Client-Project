@@ -104,7 +104,7 @@ const ImageSlider1 = () => {
       {/* Section Title */}
       <div ref={titleRef} style={styles.titleContainer}>
         <div style={styles.goldenLine}></div>
-        <h2 style={styles.title}>OUR GALLERY</h2>
+        <h2 style={styles.title}>MEMORIES</h2>
         <div style={styles.goldenLine}></div>
       </div>
 

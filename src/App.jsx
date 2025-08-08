@@ -20,13 +20,14 @@ function App() {
   return (
     <>
     <Myhero/>
+        <ImageSlider1/>
+
    
     <Sectiontwo/>
     <ImageSlider/>
     
     <Secthree/>
     <EliteInstitutions/>
-    <ImageSlider1/>
     <SuccessStory/>
     {/* <HorizontalScrollSection /> */}
 
