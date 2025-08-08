@@ -12,16 +12,16 @@ const ImageSlider1 = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   
   const slides = [
-    { id: 1, image: "../src/assets/1.jpg" },
-    { id: 2, image: "/src/assets/2.jpg" },
-    { id: 3, image: "/src/assets/3.jpg" },
-    { id: 4, image: "/src/assets/4.jpg" },
-    { id: 5, image: "/src/assets/5.jpg" },
-    { id: 6, image: "/src/assets/6.jpg" },
-    { id: 7, image: "/src/assets/7.jpg" },
-    { id: 8, image: "/src/assets/8.jpg" },
-    { id: 8, image: "/src/assets/9.jpg" },
-    { id: 8, image: "/src/assets/10.jpg" }
+    { id: 1, image: "/1.1.jpg" },
+    { id: 2, image: "/2.2.jpg" },
+    { id: 3, image: "/3.3.jpg" },
+    { id: 4, image: "/4.4.jpg" },
+    { id: 5, image: "/5.5.jpg" },
+    { id: 6, image: "/6.6.jpg" },
+    { id: 7, image: "/7.7.jpg" },
+    { id: 8, image: "/8.8.jpg" },
+    { id: 8, image: "/9.9.jpg" },
+    { id: 8, image: "/10.10.jpg" }
   ];
 
   // Duplicate slides for seamless loop
